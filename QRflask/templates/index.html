@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <!-- Corrected the CSS link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="first">
+    <h1>QR Code Generator</h1>
+    <form action="/generate" method="POST">
+        <label for="input_url">Enter URL/Any Text:</label><br><br>
+        <input type="text" id="input_url" name="input_url" placeholder="Enter URL or Text" required><br><br>
+
+        <label for="qrcode_size">QR Code Box Size:</label><br><br>
+        <input type="number" id="qrcode_size" name="qrcode_size" value="10"><br><br>
+
+        <label for="qrcode_border">Border Size:</label><br><br>
+        <input type="number" id="qrcode_border" name="qrcode_border" value="4"><br><br>
+
+        <label for="outputfile_path">Enter Output File Path (e.g., qrcode.png):</label><br><br>
+        <input type="text" id="outputfile_path" name="outputfile_path" placeholder="Enter file path" required><br><br>
+
+        <button type="submit">Generate the QR Code</button>
+    </form>
+    </div>
+    {% if qr_code_url %}
+        <div class="second">
+        <h2>Your QR Code:</h2>
+        <img src="{{ url_for('static', filename=qr_code_url) }}" alt="QR Code">
+        </div>
+    {% endif %}
+</body>
+</html>
